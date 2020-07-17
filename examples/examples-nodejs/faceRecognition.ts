@@ -2,17 +2,14 @@ import * as faceapi from 'face-api.js';
 
 import { canvas, faceDetectionNet, faceDetectionOptions, saveFile } from './commons';
 
-const REFERENCE_IMAGE = '../images/bbt1.jpg'
-const QUERY_IMAGE = '../images/bbt4.jpg'
-
 async function run() {
 
   await faceDetectionNet.loadFromDisk('../../weights')
   await faceapi.nets.faceLandmark68Net.loadFromDisk('../../weights')
   await faceapi.nets.faceRecognitionNet.loadFromDisk('../../weights')
 
-  const referenceImage = await canvas.loadImage(REFERENCE_IMAGE)
-  const queryImage = await canvas.loadImage(QUERY_IMAGE)
+  const referenceImage = await canvas.loadImage('../images/bbt1.jpg')
+  const queryImage = await canvas.loadImage('../images/bbt4.jpg')
 
   const resultsRef = await faceapi.detectAllFaces(referenceImage, faceDetectionOptions)
     .withFaceLandmarks()
